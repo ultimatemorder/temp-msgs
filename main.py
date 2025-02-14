@@ -39,9 +39,7 @@ async def on_ready():
         guild_name = channel.guild.name
         print(f"Bot está conectado ao servidor: {guild_name}")
 
-        if channel.permissions_for(channel.guild.me).send_messages and channel.permissions_for(channel.guild.me).manage_messages:
-            #await channel.send(f"🤖 Estou aqui no **{guild_name}**!")
-        else:
+        if not channel.permissions_for(channel.guild.me).send_messages and not channel.permissions_for(channel.guild.me).manage_messages:
             print(
                 "Erro: O bot não tem permissão para enviar mensagens ou gerenciar mensagens neste canal.")
     else:
@@ -80,15 +78,6 @@ async def on_message(message):
             delay = parse_time(time_str)
             if delay is None:
                 delay = DEFAULT_DELAY
-
-        try:
-            hours, remainder = divmod(delay, 3600)
-            minutes, seconds = divmod(remainder, 60)
-            time_formatted = f"{hours:02}:{minutes:02}:{seconds:02}"
-
-            #await message.reply(f"⏳ Sua mensagem será apagada em **{time_formatted}**.", delete_after=4)
-        except discord.Forbidden:
-            print(f"Erro: O bot não tem permissão para enviar mensagens temporárias.")
 
         try:
             await asyncio.sleep(delay)
