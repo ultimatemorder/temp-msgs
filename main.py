@@ -40,7 +40,7 @@ async def on_ready():
         print(f"Bot está conectado ao servidor: {guild_name}")
 
         if channel.permissions_for(channel.guild.me).send_messages and channel.permissions_for(channel.guild.me).manage_messages:
-            await channel.send(f"🤖 Estou aqui no **{guild_name}**!")
+            #await channel.send(f"🤖 Estou aqui no **{guild_name}**!")
         else:
             print(
                 "Erro: O bot não tem permissão para enviar mensagens ou gerenciar mensagens neste canal.")
@@ -86,7 +86,7 @@ async def on_message(message):
             minutes, seconds = divmod(remainder, 60)
             time_formatted = f"{hours:02}:{minutes:02}:{seconds:02}"
 
-            await message.reply(f"⏳ Sua mensagem será apagada em **{time_formatted}**.", delete_after=4)
+            #await message.reply(f"⏳ Sua mensagem será apagada em **{time_formatted}**.", delete_after=4)
         except discord.Forbidden:
             print(f"Erro: O bot não tem permissão para enviar mensagens temporárias.")
 
