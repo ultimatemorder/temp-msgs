@@ -2,6 +2,8 @@ import discord
 import asyncio
 import re
 import os
+from http.server import BaseHTTPRequestHandler
+from threading import Thread
 
 CHANNEL_ID = 1340074598330535957
 DEFAULT_DELAY = 18000
@@ -90,6 +92,21 @@ async def on_message(message):
             print(f"Erro: A mensagem não foi encontrada (já foi apagada?).")
         except Exception as e:
             print(f"Erro inesperado ao apagar a mensagem: {e}")
+
+class HealthCheckHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b'OK')
+
+def run_http_server():
+    from http.server import HTTPServer
+    server = HTTPServer(('0.0.0.0', 8000), HealthCheckHandler)
+    server.serve_forever()
+
+http_thread = Thread(target=run_http_server)
+http_thread.daemon = True
+http_thread.start()
 
 # Inicia o bot
 client.run(os.getenv("TOKEN"))
