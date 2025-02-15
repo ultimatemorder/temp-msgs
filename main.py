@@ -6,7 +6,7 @@ from http.server import BaseHTTPRequestHandler
 from threading import Thread
 
 CHANNEL_ID = 1340074598330535957
-DEFAULT_DELAY = 18000
+DEFAULT_DELAY = 30
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -54,7 +54,7 @@ async def on_message(message):
         if client.user in message.mentions:
             await message.reply(
                 "🤖 **Como eu funciono:**\n"
-                "1. Envie uma mensagem e ela será por padrão removida após {18000}s.\n"
+                "1. Envie uma mensagem e ela será por padrão removida após {30}m.\n"
                 "\n"
                 "ou...\n"
                 "1. Envie uma mensagem no formato `XhYmZs Sua mensagem` (ex: `1m30s Olá!`).\n"
