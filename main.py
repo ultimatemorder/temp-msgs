@@ -6,7 +6,7 @@ from http.server import BaseHTTPRequestHandler
 from threading import Thread
 
 CHANNEL_ID = 1340074598330535957
-DEFAULT_DELAY = 30
+DEFAULT_DELAY = 1800
 
 intents = discord.Intents.default()
 intents.message_content = True
